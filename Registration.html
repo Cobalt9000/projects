@@ -86,18 +86,36 @@ body
 </style>
 </head>
 <body>
-  <textarea rows="1px" cols="23px" class="one"; style="border-radius:15px ;font: size 1px; resize: none;">*Name</textarea>
-  <textarea rows="1px" cols="23px" class="two"; style="border-radius:15px ;font: size 1px; resize: none;">*Age</textarea>
-  <textarea rows="1px" cols="23px" class="three"; style="border-radius:15px ;font: size 1px; resize: none;">*Address</textarea>
-  <textarea rows="1px" cols="23px" class="four"; style="border-radius:15px ;font: size 1px; resize: none;">*Mobile No</textarea>
-  <textarea rows="1px" cols="23px" class="five"; style="border-radius:15px ;font: size 1px; resize: none;">*E-mail</textarea>
-  <textarea rows="1px" cols="23px" class="six"; style="border-radius:15px ;font: size 1px; resize: none;">*User ID</textarea>
-  <textarea rows="1px" cols="23px" class="seven"; style="border-radius:15px ;font: size 1px; resize: none;">*New Password</textarea>
-  <textarea rows="1px" cols="23px" class="eight"; style="border-radius:15px ;font: size 1px; resize: none;">*Confirm Password</textarea>
-  <form method="Submit" action="Registration_successful.html">
-  <input type="Submit" class="nine" value="Submit" style="border-radius:15px ;height:20px; width:70px"/>
-  <form method="Home" action="Homepage.html">
-    <input type="Submit" class="ten" value="Home" style="border-radius:15px ;height:40px; width:75px"/>
+
+  <form name="submit-to-google-sheet">
+    <textarea name="Name" placeholder="*Your Name" rows="1px" cols="23px" class="one"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <textarea name="Age" placeholder="*Age" rows="1px" cols="23px" class="two"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <textarea name="Address" placeholder="*Address" rows="1px" cols="23px" class="three"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <textarea name="mobile number" placeholder="Mobile Number" rows="1px" cols="23px" class="four"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <textarea name="Email" placeholder="*E-mail" rows="1px" cols="23px" class="five"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <textarea name="user id" placeholder="*User ID" rows="1px" cols="23px" class="six"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <textarea name="new password" placeholder="New Password" rows="1px" cols="23px" class="seven"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <textarea name="confirm password" placeholder="Confirm Password" rows="1px" cols="23px" class="eight"; style="border-radius:15px ;font: size 1px; resize: none;"></textarea>
+    <button type="submit"  class="nine" value="Submit" style="border-radius:15px ;height:20px; width:70px">Submit</button>
+
+    <!-- <form method="Submit" action="Registration_successful.html">
+    <input type="Submit" class="nine" value="Submit" style="border-radius:15px ;height:20px; width:70px"/>
+    <form method="Home" action="Homepage.html">
+      <input type="Submit" class="ten" value="Home" style="border-radius:15px ;height:40px; width:75px"/>
+    </form> -->
+
   </form>
+  
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyMUndDAPj1yUz-kMPmwXMPsdiHluNfqPd49MLWgAsAZRua3s0L2hg_nRzkwZOGgqwZDA/exec'
+    const form = document.forms['submit-to-google-sheet']
+  
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => console.log('Success!', response))
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
 </body>
 </html>
